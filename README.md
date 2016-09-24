@@ -1,5 +1,5 @@
 # get-and-clean-data-coursera
-Peer Graded Assignment: Getting and Cleaning Data Course Project
+### Getting and Cleaning Data Course Project
 
 Included in this repository you find this file `README.md`, the R script `run_analysis.R` for performing the analysis, as well as the file `CODEBOOK.md` that describes the variables, the data, and transformations performed to clean up the input data.
 
