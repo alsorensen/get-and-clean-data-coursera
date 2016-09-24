@@ -36,14 +36,14 @@ script `run_analysis.R`.
 
 First the data from the `UCI HAR Dataset` is loaded into:
 
-    `activity_labels` links the class labels with their activity name.
-    `features` is the list of all features.
-    `x_test` the test set.
-    `y_test` the test labels.
-    `subject_test` contains the ID of subject who performed the test activity.
-    `x_train` the training set.
-    `y_train` the training labels.
-    `subject_train` contains the ID of the subject who performed the training activity.
+*  `activity_labels` links the class labels with their activity name.
+*  `features` is the list of all features.
+*  `x_test` the test set.
+*  `y_test` the test labels.
+*  `subject_test` contains the ID of subject who performed the test activity.
+*  `x_train` the training set.
+*  `y_train` the training labels.
+*  `subject_train` contains the ID of the subject who performed the training activity.
 
 Afterwards the data is merged into one dataset named `output1`.
 
@@ -52,7 +52,7 @@ Afterwards the data is merged into one dataset named `output1`.
 The next step is to create a dataset named `output2` that contains only the measurements on the mean and standard deviation for each measurement.
 
 #### Part 3
-In step 3 descriptive activity names to name the activities are included. These are WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING mentioned in the introduction. The result is `output3`.
+In step 3 descriptive activity names to name the activities are included. These are `WALKING`, `WALKING_UPSTAIRS`, `WALKING_DOWNSTAIRS`, `SITTING`, `STANDING`, and `LAYING` as mentioned in the introduction. The result is `output3`.
 
 #### Part 4
 In the fourth step we label the data set `output3` with descriptive variable names and output the tidy data set `output4` to the file `output.txt` in the data folder.
@@ -68,18 +68,47 @@ The script is divided into 6 steps, described below. In the script the library `
 This is the initial and optional step, where the `UCI HAR Dataset` is download and unzipped to the data folder in the working directory. The data folder is created if it does not exist.
 
 #### Step 1
-Here features, labels, test data and trainig data is read. These data is the merged using `cbind` and `rbind` to create one data set `output1`.
+Here features, labels, test data and training data is read and loaded into
+```
+    activity_labels
+    features
+    x_test
+    y_test
+    subject_test
+    x_train
+    y_train
+    subject_train
+```
+These data are then merged using `cbind` and `rbind` to create one data set `output1`.
 
 #### Step 2
 This step extracts only the measurements on the mean and standard deviation for each measurement in `output1` using `grep`. The result is called `output2`.
 
 #### Step 3
-Here the descriptive activity names are used to name the activities in the data set `output2`. The result is called `output3`.
+Here the descriptive activity names are used to name the activities in the data set `output2`. These names are `WALKING`, `WALKING_UPSTAIRS`, `WALKING_DOWNSTAIRS`, `SITTING`, `STANDING`, and `LAYING`. The result is called `output3`.
 
 #### Step 4
-In this step we follow the recommendations for names of variables from the lectures and use `gsub`.
+In this step we follow the recommendations for names of variables from the lectures and use `gsub`. 
 We appropriate label the data set to make descriptive variable names in the tidy data set `output4`
 and finally output the data to the file `output.txt` in the data folder.
+
+The variables are renamed as shown here:
+```
+colNames <- colnames(output3)
+colNames
+for (i in 1:length(colNames)) 
+{
+    colNames[i] = gsub("(-mean\\())(-*)","Mean",colNames[i])
+    colNames[i] = gsub("(-std\\())(-*)","StdDev",colNames[i])
+    colNames[i] = gsub("^t","time",colNames[i])
+    colNames[i] = gsub("^f","frequency",colNames[i])
+    colNames[i] = gsub("BodyBody","Body",colNames[i])
+    colNames[i] = gsub("Acc","Accelerometer",colNames[i])
+    colNames[i] = gsub("Gyro","Gyroscope",colNames[i])
+    colNames[i] = gsub("Mag","Magnitude",colNames[i])
+};
+```
+Thus, `Gyro` is translated into `Gyroscope`, `Mag` is translated into `Magnitude` etc.
 
 #### Step 5
 From the data set `output4`, we create a second, independent tidy data set `data_step5` with the average of each variable for each activityID and each subject by the use of `aggregate` with `FUN = mean` on a `data_extract` from `output4`, where the column `activity` is dropped. 
