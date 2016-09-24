@@ -13,3 +13,5 @@ In the script run_analysis.R the following steps are performed:
     5 Create a second tidy data set (output2.txt) with averages of each variable for each activity and each subject.
 
 The results are written to the two files `output.txt` and `output2.txt` in the data folder.
+
+For more detailed information please take a look at the `CODEBOOK.md` file and the the R script `run_analysis.R`.
