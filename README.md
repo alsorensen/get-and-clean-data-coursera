@@ -1,7 +1,16 @@
 # get-and-clean-data-coursera
 ### Getting and Cleaning Data Course Project
 
-Included in this repository you find this file `README.md`, the R script `run_analysis.R` for performing the analysis, as well as the file `CODEBOOK.md` that describes the variables, the data, and transformations performed to clean up the input data.
+Included in this repository you find the following files:
+
+* `README.md` (this file), 
+* `run_analysis.R` the R script for performing the analysis, and 
+* `CODEBOOK.md` that describes the variables, the data, and transformations performed to clean up the input data.
+
+As a bonus you also find the two files:
+
+* `output.txt` the output from fourth step described below
+* `output2.txt` the output from fifth step described below
 
 In the script run_analysis.R the following steps are performed:
 
